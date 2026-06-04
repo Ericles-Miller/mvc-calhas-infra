@@ -1,37 +1,3 @@
-variable "environment" {
-  type        = string
-  description = "Ambiente (dev, prod)"
-  default     = "dev"
-}
-
-variable "aws_profile" {
-  type        = string
-  description = "AWS Profile a ser usado"
-  default     = "ericles-dev"
-}
-
-variable "aws_region" {
-  type        = string
-  description = "Região AWS"
-  default     = "us-east-1"
-}
-
-
-# ==================================================
-# TAGS GLOBAIS
-# ==================================================
-
-variable "project_tags" {
-  type        = map(string)
-  description = "Tags comuns para todos os recursos"
-  default = {
-    Project = "Challenge-IAC"
-  }
-}
-
-# ==================================================
-# VARIÁVEIS DO MÓDULO COGNITO
-# ==================================================
 variable "user_pool_name" {
   description = "Name of the Cognito User Pool"
   type        = string
@@ -62,6 +28,12 @@ variable "logout_urls" {
 variable "user_pool_domain" {
   description = "Domain for the Cognito User Pool"
   type        = string
+}
+
+variable "environment" {
+  description = "Environment (e.g., dev, prod)"
+  type        = string
+  default     = "dev"
 }
 
 variable "tags" {
