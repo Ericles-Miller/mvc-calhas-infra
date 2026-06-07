@@ -69,3 +69,17 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+# ==================================================
+# VARIÁVEIS DO MÓDULO S3
+# ==================================================
+variable "s3_bucket_name" {
+  description = "Name of the S3 bucket to create"
+  type        = string
+} 
+
+variable "s3_tags" {
+  description = "Map of tags to apply to the S3 bucket"
+  type        = map(string)
+  default     = {}
+} 
