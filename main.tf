@@ -1,7 +1,7 @@
 module "cognito" {
   source = "./modules/cognito"
 
-   user_pool_name    = var.user_pool_name
+  user_pool_name    = var.user_pool_name
   user_pool_domain  = var.user_pool_domain
   google_client_id  = var.google_client_id
   google_client_secret = var.google_client_secret
@@ -9,4 +9,11 @@ module "cognito" {
   logout_urls       = var.logout_urls
   environment       = var.environment
   tags              = var.tags
+}
+
+module "s3"  {
+  source = "./modules/S3"
+
+  s3_bucket_name = var.s3_bucket_name
+  s3_tags        = var.s3_tags
 }
