@@ -39,3 +39,23 @@ output "s3_app_secret_access_key" {
   value       = module.s3.app_secret_access_key
   sensitive   = true
 }
+
+output "sqs_queue_url" {
+  description = "URL da fila SQS de OS (AWS_SQS_SERVICE_ORDER_QUEUE_URL)"
+  value       = module.sqs.queue_url
+}
+
+output "sqs_queue_arn" {
+  description = "ARN da fila SQS de OS"
+  value       = module.sqs.queue_arn
+}
+
+output "sqs_dlq_url" {
+  description = "URL da DLQ da fila de OS"
+  value       = module.sqs.dlq_url
+}
+
+output "sqs_dlq_arn" {
+  description = "ARN da DLQ da fila de OS"
+  value       = module.sqs.dlq_arn
+}

@@ -76,10 +76,35 @@ variable "tags" {
 variable "s3_bucket_name" {
   description = "Name of the S3 bucket to create"
   type        = string
-} 
+}
 
 variable "s3_tags" {
   description = "Map of tags to apply to the S3 bucket"
   type        = map(string)
   default     = {}
-} 
+}
+
+# ==================================================
+# VARIÁVEIS DO MÓDULO SQS
+# ==================================================
+variable "sqs_queue_name" {
+  description = "Nome da fila SQS de OS (service orders)"
+  type        = string
+}
+
+variable "sqs_dlq_name" {
+  description = "Nome da Dead Letter Queue da fila de OS"
+  type        = string
+}
+
+variable "sqs_max_receive_count" {
+  description = "Quantidade de tentativas antes de mover a mensagem para a DLQ"
+  type        = number
+  default     = 5
+}
+
+variable "sqs_tags" {
+  description = "Map of tags to apply to the SQS resources"
+  type        = map(string)
+  default     = {}
+}

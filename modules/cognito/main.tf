@@ -4,7 +4,7 @@ resource "aws_cognito_user_pool" "pool" {
   tags = merge(
     var.tags,
     {
-      Terraform = "true"
+      Terraform   = "true"
       Environment = var.environment
     }
   )
