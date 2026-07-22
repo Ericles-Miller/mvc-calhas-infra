@@ -18,3 +18,8 @@ output "app_secret_access_key" {
   value       = aws_iam_access_key.app.secret
   sensitive   = true
 }
+
+output "app_iam_user_name" {
+  description = "Nome do usuário IAM da aplicação, usado para anexar policies de outros módulos (ex: SQS)"
+  value       = aws_iam_user.app.name
+}
