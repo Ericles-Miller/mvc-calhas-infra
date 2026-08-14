@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "app_sqs_access" {
 }
 
 resource "aws_iam_user_policy" "app_sqs_access" {
-  name   = "sqs-service-order-access"
+  name   = var.policy_name
   user   = var.app_iam_user_name
   policy = data.aws_iam_policy_document.app_sqs_access.json
 }

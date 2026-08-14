@@ -59,3 +59,23 @@ output "sqs_dlq_arn" {
   description = "ARN da DLQ da fila de OS"
   value       = module.sqs.dlq_arn
 }
+
+output "sqs_evaluation_queue_url" {
+  description = "URL da fila SQS de alertas de avaliação (AWS_SQS_EVALUATION_QUEUE_URL)"
+  value       = module.sqs_evaluation.queue_url
+}
+
+output "sqs_evaluation_queue_arn" {
+  description = "ARN da fila SQS de alertas de avaliação"
+  value       = module.sqs_evaluation.queue_arn
+}
+
+output "sqs_evaluation_dlq_url" {
+  description = "URL da DLQ da fila de alertas de avaliação"
+  value       = module.sqs_evaluation.dlq_url
+}
+
+output "sqs_evaluation_dlq_arn" {
+  description = "ARN da DLQ da fila de alertas de avaliação"
+  value       = module.sqs_evaluation.dlq_arn
+}
