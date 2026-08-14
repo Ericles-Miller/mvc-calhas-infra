@@ -37,6 +37,12 @@ variable "app_iam_user_name" {
   type        = string
 }
 
+variable "policy_name" {
+  description = "Nome da IAM user policy de acesso à fila. Precisa ser único por usuário IAM — se o módulo for instanciado mais de uma vez para o mesmo app_iam_user_name, cada instância precisa de um valor diferente."
+  type        = string
+  default     = "sqs-service-order-access"
+}
+
 variable "tags" {
   description = "Tags para os recursos do SQS"
   type        = map(string)

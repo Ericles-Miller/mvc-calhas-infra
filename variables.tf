@@ -108,3 +108,13 @@ variable "sqs_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "sqs_evaluation_queue_name" {
+  description = "Nome da fila SQS de alertas de avaliação (PC-150/151)"
+  type        = string
+}
+
+variable "sqs_evaluation_dlq_name" {
+  description = "Nome da Dead Letter Queue da fila de alertas de avaliação"
+  type        = string
+}
