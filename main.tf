@@ -27,3 +27,14 @@ module "sqs" {
   app_iam_user_name = module.s3.app_iam_user_name
   tags              = var.sqs_tags
 }
+
+module "sqs_evaluation" {
+  source = "./modules/SQS"
+
+  queue_name        = var.sqs_evaluation_queue_name
+  dlq_name          = var.sqs_evaluation_dlq_name
+  max_receive_count = var.sqs_max_receive_count
+  app_iam_user_name = module.s3.app_iam_user_name
+  policy_name       = "sqs-evaluation-access"
+  tags              = var.sqs_tags
+}
