@@ -36,10 +36,24 @@ resource "aws_s3_bucket_policy" "public_read_avatar" {
   depends_on = [aws_s3_bucket_public_access_block.this]
 }
 
-# Permissões que o AwsS3Service precisa (upload/get/delete) em "avatar/*"
+# Prefixos usados por AwsS3Service.upload(...) em todo o app — precisam ficar em sincronia
+# com os s3Key montados em cada *.service.ts (avatar, realEstate, serviceOrder, pieceType,
+# quoteItem, inspection, contract). A policy original só cobria "avatar/*".
+locals {
+  app_s3_prefixes = [
+    "avatar",
+    "realEstate",
+    "serviceOrder",
+    "pieceType",
+    "quoteItem",
+    "inspection",
+    "contract",
+  ]
+}
+
 data "aws_iam_policy_document" "app_s3_access" {
   statement {
-    sid       = "ListAvatarPrefix"
+    sid       = "ListAppPrefixes"
     effect    = "Allow"
     actions   = ["s3:ListBucket"]
     resources = [aws_s3_bucket.s3_bucket.arn]
@@ -47,15 +61,15 @@ data "aws_iam_policy_document" "app_s3_access" {
     condition {
       test     = "StringLike"
       variable = "s3:prefix"
-      values   = ["avatar/*"]
+      values   = [for prefix in local.app_s3_prefixes : "${prefix}/*"]
     }
   }
 
   statement {
-    sid       = "ReadWriteAvatarObjects"
+    sid       = "ReadWriteAppObjects"
     effect    = "Allow"
     actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
-    resources = ["${aws_s3_bucket.s3_bucket.arn}/avatar/*"]
+    resources = [for prefix in local.app_s3_prefixes : "${aws_s3_bucket.s3_bucket.arn}/${prefix}/*"]
   }
 }
 
@@ -65,7 +79,7 @@ resource "aws_iam_user" "app" {
 }
 
 resource "aws_iam_user_policy" "app_s3_access" {
-  name   = "s3-avatar-access"
+  name   = "s3-app-access"
   user   = aws_iam_user.app.name
   policy = data.aws_iam_policy_document.app_s3_access.json
 }
